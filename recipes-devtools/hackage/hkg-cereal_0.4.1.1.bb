@@ -4,7 +4,5 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=5ec64b8b2cb5d58bfa9e4662374b9108"
 
 inherit hackage
 
-SRC_URI[md5sum] = "70d24b61194880df3ec798ad89a21a7b"
-SRC_URI[sha256sum] = "7e94e9b337f9372289839ceeefb255ac671802904ebdfe01aee7fcb51d2e0d2f"
-
-PR = "r1"
+SRC_URI[md5sum] = "139ac40880440d59fc94e9aacfb0c467"
+SRC_URI[sha256sum] = "df047216179ba3817134e32c73ef9e3b5dddbd4efff604f50ca0ca0c93753097"
