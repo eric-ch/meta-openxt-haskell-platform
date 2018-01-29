@@ -41,12 +41,17 @@ FILES_${PN}-dev_append = " \
 RUNGHC = "runghc"
 # Use a local copy of the database to keep control over what is in the sysroot.
 GHC_PACKAGE_DATABASE = "local-packages.db"
-export GHC_PACKAGE_PATH = "${S}/${GHC_PACKAGE_DATABASE}"
 
 do_update_local_pkg_database() {
     # Build the local package database for runghc to process dependencies.
     rm -rf "${GHC_PACKAGE_DATABASE}"
     ghc-pkg init "${GHC_PACKAGE_DATABASE}"
+
+    # Sysroot construction might bork the native database.
+    # TODO: This looks like a timestamp check on the .conf and the
+    # packages.cache not being created at ghc-native installation in the recipe's
+    # sysroot. It should probably change in the ghc-native recipe...
+    ghc-pkg recache
 }
 # Run after do_prepare_recipe_sysroot to ensure that the recipe's sysroot is
 # populated by every item in DEPENDS before we update the local package
