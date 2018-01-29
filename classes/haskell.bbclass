@@ -19,7 +19,7 @@ PACKAGES = " \
     ${PN}-dev \
 "
 FILES_${PN}_append = " \
-    ${libdir}/${HPN}-${HPV}/ghc-*/libH*.so \
+    ${libdir}/*-*-ghc-*/${HPN}-${HPV}/libH*.so \
     ${libdir}/ghc-*/package.conf.d/*.conf \
     ${bindir}/* \
 "
@@ -27,15 +27,15 @@ FILES_${PN}-doc_append = " \
     ${datadir}/* \
 "
 FILES_${PN}-staticdev_append = " \
-    ${libdir}/${HPN}-${HPV}/ghc-*/libHS*.a \
+    ${libdir}/*-*-ghc-*/${HPN}-${HPV}/libHS*.a \
 "
 FILES_${PN}-dbg_append = " \
-    ${libdir}/${HPN}-${HPV}/ghc-*/*.o \
-    ${libdir}/${HPN}-${HPV}/ghc-*/.debug \
+    ${libdir}/*-*-ghc-*/${HPN}-${HPV}/*.o \
+    ${libdir}/*-*-ghc-*/${HPN}-${HPV}/.debug \
     ${prefix}/src/debug \
 "
 FILES_${PN}-dev_append = " \
-    ${libdir}/${HPN}-${HPV}/ghc-*/* \
+    ${libdir}/*-*-ghc-*/${HPN}-${HPV}/* \
 "
 
 RUNGHC = "runghc"
@@ -158,7 +158,7 @@ do_fixup_rpath_class-target() {
     ghc_version=${ghc_version##* }
 
     for f in \
-        ${D}${libdir}/${HPN}-${HPV}/ghc-${ghc_version}/libHS${HPN}-${HPV}*.so \
+        ${D}${libdir}/*-*-ghc-${ghc_version}/${HPN}-${HPV}/libHS${HPN}-${HPV}*.so \
         ${D}${bindir}/* \
         ${D}${sbindir}/*
     do
@@ -183,7 +183,7 @@ do_fixup_rpath[doc] = "Amend rpath set by GHC to comply with target's environmen
 do_fixup_rpath[dirs] = "${B}"
 
 do_install() {
-    ${RUNGHC} Setup.*hs copy --copy-prefix="${D}/${prefix}" --verbose
+    ${RUNGHC} Setup.*hs copy --destdir="${D}" --verbose
 
     # Prepare GHC package database files.
     if [ -f "${S}/${HPN}-${HPV}.conf" ]; then
