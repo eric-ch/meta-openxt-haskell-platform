@@ -6,7 +6,3 @@ inherit hackage
 
 SRC_URI[md5sum] = "019036c9111b521654eab2b9dee7648d"
 SRC_URI[sha256sum] = "a6daa0ee43ddede620363ab26614fef69361bd5b8f77aa6918b5a4ecb083f425"
-
-DEPENDS += "hkg-deepseq"
-
-PR = "r1"

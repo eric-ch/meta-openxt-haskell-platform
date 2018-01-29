@@ -9,7 +9,6 @@ SRC_URI[sha256sum] = "d9e8d0b82d64775a1529d3747adfe820852a743e386ce75b080b040cf5
 
 DEPENDS += " \
     hkg-binary \
-    hkg-deepseq \
     hkg-hunit \
     hkg-hxt-charproperties \
     hkg-hxt-regex-xmlschema \
@@ -18,5 +17,3 @@ DEPENDS += " \
     hkg-network \
     hkg-parsec \
 "
-
-PR = "r1"
