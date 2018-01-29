@@ -4,12 +4,10 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=af37f6ace7c98678b40104af99e85b6a"
 
 inherit hackage
 
-SRC_URI[md5sum] = "732fdea48c7d7b1500227838793d2be4"
-SRC_URI[sha256sum] = "fb494f76b5aa415972e06ba5a76964c06c448199e8a968a332595e5879b4fc81"
+SRC_URI[md5sum] = "7e16fe39f738aacabd34ceb05b4a2e1d"
+SRC_URI[sha256sum] = "c2b538c9ce6716f4a1b4c0cb63ed5c6e5ee3e69e80dbb7826ee7f5392f45e874"
 DEPENDS += " \
     hkg-cereal \
     hkg-mtl \
     hkg-network \
 "
-
-PR = "r1"
