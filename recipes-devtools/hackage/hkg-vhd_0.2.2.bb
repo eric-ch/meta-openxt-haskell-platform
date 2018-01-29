@@ -6,8 +6,8 @@ EXTRA_CABAL_CONF += "--flag=executable"
 
 inherit hackage
 
-SRC_URI[md5sum] = "4d727ca01e55884d642613593edb47f5"
-SRC_URI[sha256sum] = "f15dd0127cbaaaa3fef69bfde6e2ac8b83e9d3a0295bf94de8c0c9e8c928e375"
+SRC_URI[md5sum] = "693b3f5e3af835a29f411741af3e9e7e"
+SRC_URI[sha256sum] = "7c678f076395f44d853f87a4538635bc83d7a10319933dec9e06b40ce409ea7c"
 DEPENDS += " \
     hkg-mmap \
     hkg-storable-endian \
