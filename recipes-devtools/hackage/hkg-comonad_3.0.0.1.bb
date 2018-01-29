@@ -9,7 +9,4 @@ SRC_URI[sha256sum] = "5f79b15a4bf87572c3b38610ef9403f4ac6a48dc493c311f0edb241add
 
 DEPENDS += " \
     hkg-semigroups \
-    hkg-transformers \
 "
-
-PR = "r1"

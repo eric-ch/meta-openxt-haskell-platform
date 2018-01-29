@@ -15,7 +15,4 @@ DEPENDS += " \
     hkg-comonad \
     hkg-contravariant \
     hkg-semigroups \
-    hkg-transformers \
 "
-
-PR = "r1"

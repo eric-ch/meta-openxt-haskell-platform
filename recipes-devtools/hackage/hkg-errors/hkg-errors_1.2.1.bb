@@ -13,8 +13,5 @@ SRC_URI =+ " \
 "
 DEPENDS += " \
     hkg-safe \
-    hkg-transformers \
     hkg-either \
 "
-
-PR = "r1"
