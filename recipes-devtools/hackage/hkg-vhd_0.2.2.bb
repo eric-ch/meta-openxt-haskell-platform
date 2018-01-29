@@ -13,4 +13,8 @@ DEPENDS += " \
     hkg-storable-endian \
     hkg-cereal \
     hkg-text \
+    hkg-byteable \
+    hkg-cipher-aes \
+    hkg-random \
+    hkg-cryptohash \
 "
