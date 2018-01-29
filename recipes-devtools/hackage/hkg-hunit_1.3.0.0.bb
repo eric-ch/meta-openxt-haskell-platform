@@ -5,9 +5,5 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=4d036bff24e7f9e1a7a9012fbe91bb35"
 HPN = "HUnit"
 inherit hackage
 
-SRC_URI[md5sum] = "b834809dc5c4ac4d1e519d8d6c456600"
-SRC_URI[sha256sum] = "fdbcbc28196d616b449bf3e46c30dcd5577dc92f290458e2dbdbfc5a65de327a"
-
-PR = "r1"
-
-RDEPENDS_${HPN} += "libc6"
+SRC_URI[md5sum] = "9780a1e60cb66d4d49d576b657caa7ef"
+SRC_URI[sha256sum] = "e130db953a2310d2c256a3923af0250be6ea19317f7d369b56d48f84cf96a55c"
