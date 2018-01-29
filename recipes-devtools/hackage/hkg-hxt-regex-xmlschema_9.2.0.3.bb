@@ -4,12 +4,10 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=cb61534369f1bbb7cbe62e014d3d5717"
 
 inherit hackage
 
-SRC_URI[md5sum] = "1ff0c995ebaedaaf1289e6e65e60857c"
-SRC_URI[sha256sum] = "eef1c9ae42b3d2ed78019bec6bed92034b1395ea5aa725a459df9ca5d34d884a"
+SRC_URI[md5sum] = "7b875bedc63771bad57e42164387c4db"
+SRC_URI[sha256sum] = "f4743ba65498d6001cdfcf5cbc3317d4bc43941be5c7030b60beb83408c892b0"
 
 DEPENDS += " \
     hkg-parsec \
     hkg-hxt-charproperties \
 "
-
-PR = "r1"
