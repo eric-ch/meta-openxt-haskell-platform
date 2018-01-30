@@ -4,5 +4,10 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=93e7d84c230d8f835ebffaa82a621e39"
 
 inherit hackage
 
-SRC_URI[md5sum] = "bd99282e2daae5eecd1c953b7b77c990"
-SRC_URI[sha256sum] = "4fa9e8ae38f0ed0633251f7a18c51946ee9fa486ed768389b5b6edaacf3c7cb4"
+SRC_URI[md5sum] = "d2904686fa190187ea99e756c8f2c901"
+SRC_URI[sha256sum] = "6aa3494fc70659342fbbb163035d5827ecfd8079e3c929e2372adf771fd52387"
+
+DEPENDS += " \
+    hkg-stm \
+    hkg-transformers-compat \
+"
