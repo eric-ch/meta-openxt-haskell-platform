@@ -1,0 +1,58 @@
+Index: dbus-core-0.9.3/dbus-core.cabal
+===================================================================
+--- dbus-core-0.9.3.orig/dbus-core.cabal	2018-01-30 19:16:53.447726777 -0500
++++ dbus-core-0.9.3/dbus-core.cabal	2018-01-30 19:36:39.850008890 -0500
+@@ -77,16 +77,16 @@
+   -- tests/
+   build-depends:
+       base >= 4.0 && < 5.0
+-    , binary >= 0.4 && < 0.6
+-    , bytestring >= 0.9 && < 0.10
+-    , containers >= 0.1 && < 0.5
++    , binary >= 0.4 && < 0.8
++    , bytestring >= 0.9 && < 0.11
++    , containers >= 0.1 && < 0.6
+     , data-binary-ieee754 >= 0.3 && < 0.5
+     , libxml-sax >= 0.7 && < 0.8
+-    , network >= 2.2 && < 2.4
++    , network >= 2.2 && < 2.7
+     , parsec >= 2.0 && < 3.2
+-    , text >= 0.11.1.5 && < 0.12
+-    , unix >= 2.2 && < 2.6
+-    , vector >= 0.7 && < 0.10
++    , text >= 0.11.1.5 && < 1.3
++    , unix >= 2.2 && < 2.8
++    , vector >= 0.7 && < 0.12
+     , xml-types >= 0.3 && < 0.4
+ 
+   exposed-modules:
+Index: dbus-core-0.9.3/tests/dbus-core-tests.cabal
+===================================================================
+--- dbus-core-0.9.3.orig/tests/dbus-core-tests.cabal	2018-01-30 19:16:54.344380044 -0500
++++ dbus-core-0.9.3/tests/dbus-core-tests.cabal	2018-01-30 19:36:44.573274024 -0500
+@@ -17,18 +17,18 @@
+ 
+   build-depends:
+       base > 4.0 && < 5.0
+-    , binary >= 0.4 && < 0.6
+-    , bytestring >= 0.9 && < 0.10
++    , binary >= 0.4 && <= 0.7
++    , bytestring >= 0.9 && <= 0.10
+     , chell >= 0.1.1 && < 0.2
+     , chell-quickcheck >= 0.1 && < 0.2
+-    , containers >= 0.1 && < 0.5
++    , containers >= 0.1 && < 0.6
+     , data-binary-ieee754 >= 0.3 && < 0.5
+     , libxml-sax >= 0.7 && < 0.8
+-    , network >= 2.2 && < 2.4
++    , network >= 2.2 && < 2.7
+     , parsec >= 2.0 && < 3.2
+     , QuickCheck == 2.4.*
+-    , text >= 0.11.1.5 && < 0.12
++    , text >= 0.11.1.5 && < 1.3
+     , transformers >= 0.2 && < 0.3
+-    , unix >= 2.2 && < 2.6
+-    , vector >= 0.7 && < 0.10
++    , unix >= 2.2 && < 2.8
++    , vector >= 0.7 && < 0.12
+     , xml-types >= 0.3 && < 0.4
