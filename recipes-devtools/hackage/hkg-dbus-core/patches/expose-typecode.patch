@@ -1,0 +1,12 @@
+Index: dbus-core-0.9.3/hs/DBus/Types.hs
+===================================================================
+--- dbus-core-0.9.3.orig/hs/DBus/Types.hs	2012-06-23 11:46:36.000000000 -0400
++++ dbus-core-0.9.3/hs/DBus/Types.hs	2018-01-31 18:54:26.026778630 -0500
+@@ -17,6 +17,7 @@
+ 
+ module DBus.Types
+ 	( Type(..)
++	, typeCode
+ 	
+ 	, Signature
+ 	, signature
