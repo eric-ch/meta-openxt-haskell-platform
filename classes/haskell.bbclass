@@ -41,7 +41,7 @@ FILES_${PN}-dev_append = " \
 RUNGHC = "runghc"
 # Use a local copy of the database to keep control over what is in the sysroot.
 GHC_PACKAGE_DATABASE = "local-packages.db"
-export GHC_PACKAGE_PATH = "${S}/${GHC_PACKAGE_DATABASE}"
+export GHC_PACKAGE_PATH = "${B}/${GHC_PACKAGE_DATABASE}"
 
 do_update_local_pkg_database() {
     # Build the local package database for runghc to process dependencies.
@@ -53,7 +53,6 @@ do_update_local_pkg_database() {
 # database. runghc will not be able to process dependencies otherwise, neither
 # will ghc-pkg be there if not installed on the host.
 addtask do_update_local_pkg_database before do_configure after do_prepare_recipe_sysroot
-do_update_local_pkg_database[depends] = "${PN}:do_unpack"
 do_update_local_pkg_database[doc] = "Put together a local Haskell package database for runghc to use, and amend configuration to match bitbake environment."
 # See: bitbake.git: 67a7b8b0 build: don't use $B as the default cwd for functions
 do_update_local_pkg_database[dirs] = "${B}"
