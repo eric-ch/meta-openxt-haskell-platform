@@ -181,10 +181,10 @@ do_install() {
     ${RUNGHC} Setup.*hs copy --copy-prefix="${D}/${prefix}" --verbose
 
     # Prepare GHC package database files.
-    if [ -f "${S}/${HPN}-${HPV}.conf" ]; then
+    if [ -f "${B}/${HPN}-${HPV}.conf" ]; then
         ghc_version=$(ghc-pkg --version)
         ghc_version=${ghc_version##* }
         install -m 755 -d ${D}${libdir}/ghc-${ghc_version}/package.conf.d
-        install -m 644 ${S}/${HPN}-${HPV}.conf ${D}${libdir}/ghc-${ghc_version}/package.conf.d
+        install -m 644 ${B}/${HPN}-${HPV}.conf ${D}${libdir}/ghc-${ghc_version}/package.conf.d
     fi
 }
