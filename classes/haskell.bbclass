@@ -85,26 +85,6 @@ do_update_local_pkg_database_append_class-native() {
     ghc-pkg -f "${GHC_PACKAGE_DATABASE}" recache
 }
 
-# This is oddly required because there is no good way to pass ${CC} as set
-# per bitbake to runghc. One might think of using --ghc-options="-pgmc ${CC%%
-# *} -otpc ${CC#* }" but no... it does not manage to parse the options correctly...
-do_makeup_wrappers() {
-    cat << EOF > ghc-cc
-#!/bin/sh
-exec ${CC} ${CFLAGS} "\$@"
-EOF
-    chmod +x ghc-cc
-# ghc will pass -Wl options, so using gcc (CCLD) not ld.
-    cat << EOF > ghc-ld
-#!/bin/sh
-exec ${CCLD} ${LDFLAGS} "\$@"
-EOF
-    chmod +x ghc-ld
-}
-addtask do_makeup_wrappers before do_configure after do_patch
-do_makeup_wrappers[doc] = "Generate local wrappers for the compiler to pass bitbake environment through ghc."
-do_makeup_wrappers[dirs] = "${B}"
-
 do_configure() {
     ${RUNGHC} Setup.*hs clean --verbose
     ${RUNGHC} Setup.*hs configure \
@@ -112,9 +92,9 @@ do_configure() {
         --disable-executable-stripping \
         --package-db="${GHC_PACKAGE_DATABASE}" \
         --ghc-options='-dynload sysdep
-                       -pgmc ./ghc-cc
-                       -pgml ./ghc-ld' \
-        --with-gcc="./ghc-cc" \
+                       -pgmc ghc-cc
+                       -pgml ghc-ld' \
+        --with-gcc="ghc-cc" \
         --enable-shared \
         --prefix="${prefix}" \
         --verbose
@@ -123,9 +103,9 @@ do_configure() {
 do_compile() {
     ${RUNGHC} Setup.*hs build \
         --ghc-options='-dynload sysdep
-                       -pgmc ./ghc-cc
-                       -pgml ./ghc-ld' \
-        --with-gcc="./ghc-cc" \
+                       -pgmc ghc-cc
+                       -pgml ghc-ld' \
+        --with-gcc="ghc-cc" \
         --verbose
 }
 
