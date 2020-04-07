@@ -39,58 +39,35 @@ FILES_${PN}-dev_append = " \
 "
 
 RUNGHC = "runghc"
-# Use a local copy of the database to keep control over what is in the sysroot.
-GHC_PACKAGE_DATABASE = "local-packages.db"
-export GHC_PACKAGE_PATH = "${S}/${GHC_PACKAGE_DATABASE}"
 
-do_update_local_pkg_database() {
-    # Build the local package database for runghc to process dependencies.
-    rm -rf "${GHC_PACKAGE_DATABASE}"
-    ghc-pkg init "${GHC_PACKAGE_DATABASE}"
-}
-# Run after do_prepare_recipe_sysroot to ensure that the recipe's sysroot is
-# populated by every item in DEPENDS before we update the local package
-# database. runghc will not be able to process dependencies otherwise, neither
-# will ghc-pkg be there if not installed on the host.
-addtask do_update_local_pkg_database before do_configure after do_prepare_recipe_sysroot
-do_update_local_pkg_database[depends] = "${PN}:do_unpack"
-do_update_local_pkg_database[doc] = "Put together a local Haskell package database for runghc to use, and amend configuration to match bitbake environment."
-# See: bitbake.git: 67a7b8b0 build: don't use $B as the default cwd for functions
-do_update_local_pkg_database[dirs] = "${B}"
+GHC_PACKAGE_PATH[export] = "1"
+GHC_PACKAGE_PATH_class-native = "${STAGING_LIBDIR_NATIVE}/ghc-6.12.3/package.conf.d"
+GHC_PACKAGE_PATH_class-target = "${STAGING_LIBDIR}/ghc-6.12.3/package.conf.d"
 
-do_update_local_pkg_database_append_class-target() {
+# Bitbake will amend the WORKDIR paths it finds (staging stage 2). This works to
+# our advantage for native class, target class need to be configured with their
+# target dependencies, so substitute the target paths for WORKDIR starging so
+# ghc-pkg finds them.
+do_configure_prepend_class-target() {
     ghc_version=$(ghc-pkg --version)
     ghc_version=${ghc_version##* }
     for pkgconf in ${STAGING_LIBDIR}/ghc-${ghc_version}/package.conf.d/*.conf; do
         if [ -f "${pkgconf}" ]; then
-            sed -e "s| /usr/lib| ${STAGING_LIBDIR}|" \
+            sed -i \
+                -e "s| /usr/lib| ${STAGING_LIBDIR}|" \
                 -e "s| /usr/include| ${STAGING_INCDIR}|" \
-                $pkgconf | \
-            ghc-pkg -f "${GHC_PACKAGE_DATABASE}" --force update -
+                $pkgconf
         fi
     done
-    ghc-pkg -f "${GHC_PACKAGE_DATABASE}" recache
-}
-do_update_local_pkg_database_append_class-native() {
-    ghc_version=$(ghc-pkg --version)
-    ghc_version=${ghc_version##* }
-    for pkgconf in ${STAGING_LIBDIR_NATIVE}/ghc-${ghc_version}/package.conf.d/*.conf; do
-        if [ -f "${pkgconf}" ]; then
-            sed -e "s| /usr/lib| ${STAGING_LIBDIR_NATIVE}|" \
-                -e "s| /usr/include| ${STAGING_INCDIR_NATIVE}|" \
-                $pkgconf | \
-            ghc-pkg -f "${GHC_PACKAGE_DATABASE}" --force update -
-        fi
-    done
-    ghc-pkg -f "${GHC_PACKAGE_DATABASE}" recache
 }
 
 do_configure() {
+    ghc-pkg recache
+
     ${RUNGHC} Setup.*hs clean --verbose
     ${RUNGHC} Setup.*hs configure \
         ${EXTRA_CABAL_CONF} \
         --disable-executable-stripping \
-        --package-db="${GHC_PACKAGE_DATABASE}" \
         --ghc-options='-dynload sysdep
                        -pgmc ghc-cc
                        -pgml ghc-ld' \
