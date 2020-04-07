@@ -40,9 +40,9 @@ FILES_${PN}-dev_append = " \
 
 RUNGHC = "runghc"
 
-GHC_PACKAGE_PATH[export] = "1"
 GHC_PACKAGE_PATH_class-native = "${STAGING_LIBDIR_NATIVE}/ghc-6.12.3/package.conf.d"
 GHC_PACKAGE_PATH_class-target = "${STAGING_LIBDIR}/ghc-6.12.3/package.conf.d"
+export GHC_PACKAGE_PATH
 
 # Bitbake will amend the WORKDIR paths it finds (staging stage 2). This works to
 # our advantage for native class, target class need to be configured with their
